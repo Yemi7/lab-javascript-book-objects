@@ -86,8 +86,8 @@ function getBookDetails(book) {
 
 // Iteration 3 | Delete Language
 // Your code here:
-function deleteLanguage(bookArr){
-  bookArr.forEach(function(element,index){
+function deleteLanguage(bookArr) {
+  bookArr.forEach(function (element, index) {
     delete element.details.language;
   })
   return bookArr
@@ -96,10 +96,10 @@ deleteLanguage(booksArray);
 
 // Iteration 4 | Estimated Reading Time
 // Your code here:
-function estReadingTime(bookArr){
+function estReadingTime(bookArr) {
   let timeInSeconds = 0;
-  bookArr.forEach(function(element){
-    timeInSeconds = Math.ceil((element.pages * 500)/90);
+  bookArr.forEach(function (element) {
+    timeInSeconds = Math.ceil((element.pages * 500) / 90);
     element.readingTime = timeInSeconds;
   })
   return bookArr;
@@ -129,17 +129,50 @@ const dictionary = {
     ['Blink', 287],
   ],
 };
-function booksByAuthor(dictio) {
+
+function booksByAuthor(bookArr) {
   // Your code here:
-  const newArray = [{}];
-  for (let i = 0; i < Object.entries(dictio).length; i++) {
-    for (let j = 0; j < Object.values(dictio)[i].length; j++) {
-      console.log(Object.values(dictio)[i][j]);
+  const newArray = [];
+  const entiresAmount = Object.entries(bookArr).length;//3 entries
+  let key = ''; // capture changing key name per iteration, so we can enter each array
+  for(let i=0; i<entiresAmount;i++){
+    key = Object.keys(bookArr)[i];
+    arrayInKey = bookArr[key];
+    for(let j=0; j<arrayInKey.length;j++){
+      // console.log(Object.keys(bookArr)[i]) //author names
+      // console.log(arrayInKey[j]); // title and pages
+      // console.log(arrayInKey[j][0]); // title
+      // console.log(arrayInKey[j][1]); // pages
+      const authorName = Object.keys(bookArr)[i];
+      const titleName = arrayInKey[j][0];
+      const pageAmount = arrayInKey[j][1];
+      newArray.push({
+        title: titleName,
+        pages: pageAmount,
+        author: authorName,
+      })
+      
+      
     }
-  } //maybe a nested loop for keys and another for values
+  }
+  return newArray;
 }
 
 console.log(booksByAuthor(dictionary));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Bonus: Iteration 6 | Average Page Count
 function averagePageCount() {
