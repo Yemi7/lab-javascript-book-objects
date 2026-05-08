@@ -135,15 +135,17 @@ function booksByAuthor(bookArr) {
   const newArray = [];
   const entiresAmount = Object.entries(bookArr).length;//3 entries
   let key = ''; // capture changing key name per iteration, so we can enter each array
-  for(let i=0; i<entiresAmount;i++){
+  for (let i = 0; i < entiresAmount; i++) {
     key = Object.keys(bookArr)[i];
     arrayInKey = bookArr[key];
-    for(let j=0; j<arrayInKey.length;j++){
+    for (let j = 0; j < arrayInKey.length; j++) {
       // console.log(Object.keys(bookArr)[i]) //author names
       // console.log(arrayInKey[j]); // title and pages
       // console.log(arrayInKey[j][0]); // title
       // console.log(arrayInKey[j][1]); // pages
       const authorName = Object.keys(bookArr)[i];
+      // const pageAmount = arrayInKey[j].pop();
+      // const titleName = arrayInKey[j].shift()
       const titleName = arrayInKey[j][0];
       const pageAmount = arrayInKey[j][1];
       newArray.push({
@@ -151,34 +153,65 @@ function booksByAuthor(bookArr) {
         pages: pageAmount,
         author: authorName,
       })
-      
-      
+
+
     }
   }
   return newArray;
 }
 
+
 console.log(booksByAuthor(dictionary));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Bonus: Iteration 6 | Average Page Count
-function averagePageCount() {
+function averagePageCount(bookArr) {
   // Your code here:
+  let bookCount = 0;
+  let pageAmount = 0;
+  const entiresAmount = Object.entries(bookArr).length;//3 entries
+  let key = ''; // capture changing key name per iteration, so we can enter each array
+  for (let i = 0; i < entiresAmount; i++) {
+    key = Object.keys(bookArr)[i];
+    const arrayInKey = bookArr[key];
+    bookCount += arrayInKey.length
+    for (let j = 0; j < arrayInKey.length; j++) {
+
+      pageAmount += arrayInKey[j][1];
+
+    }
+    // console.log(average)
+    // console.log(arrayInKey.length)
+
+  } 
+  const averagePages = pageAmount/bookCount;
+  return averagePages;
 }
 
+console.log(averagePageCount(dictionary));
 
-// console.log(Object.keys(dictionary))
-// console.log(Object.values(dictionary)[0])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
