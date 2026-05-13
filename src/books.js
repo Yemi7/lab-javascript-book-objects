@@ -130,22 +130,47 @@ const dictionary = {
   ],
 };
 
-function booksByAuthor(bookArr) {
+
+function booksByAuthor(authorsObj) {  
+  const booksArr = []
+
+  for (const authorName in authorsObj) {
+    authorsObj[authorName].forEach(function (bookDataArr) {
+      const newBook = {
+        title: bookDataArr[0],
+        pages: bookDataArr[1],
+        author: authorName,
+      }
+      booksArr.push(newBook)
+    })
+  }
+  return booksArr
+}
+
+const sortedDictionary = booksByAuthor(dictionary);
+
+// for of --> iterables (arr, str)
+// for in --> objects
+
+// cmd K+U
+
+
+/* function booksByAuthor_original(bookObj) {
   // Your code here:
   const newArray = [];
-  const entiresAmount = Object.entries(bookArr).length;//3 entries
+  const entiresAmount = Object.entries(bookObj).length;//3 entries
   let key = ''; // capture changing key name per iteration, so we can enter each array
   for (let i = 0; i < entiresAmount; i++) {
-    key = Object.keys(bookArr)[i];
-    arrayInKey = bookArr[key];
+    key = Object.keys(bookObj)[i];
+    arrayInKey = bookObj[key];
     for (let j = 0; j < arrayInKey.length; j++) {
       // console.log(Object.keys(bookArr)[i]) //author names
       // console.log(arrayInKey[j]); // title and pages
       // console.log(arrayInKey[j][0]); // title
       // console.log(arrayInKey[j][1]); // pages
-      const authorName = Object.keys(bookArr)[i];
+      const authorName = Object.keys(bookObj)[i];
       // const pageAmount = arrayInKey[j].pop();
-      // const titleName = arrayInKey[j].shift()
+      // const titleName = arrayInKey[j].shift();
       const titleName = arrayInKey[j][0];
       const pageAmount = arrayInKey[j][1];
       newArray.push({
@@ -158,60 +183,20 @@ function booksByAuthor(bookArr) {
     }
   }
   return newArray;
-}
+} */
 
 
-console.log(booksByAuthor(dictionary));
+
 
 
 // Bonus: Iteration 6 | Average Page Count
 function averagePageCount(bookArr) {
-  // Your code here:
-  let bookCount = 0;
-  let pageAmount = 0;
-  const entiresAmount = Object.entries(bookArr).length;//3 entries
-  let key = ''; // capture changing key name per iteration, so we can enter each array
-  for (let i = 0; i < entiresAmount; i++) {
-    key = Object.keys(bookArr)[i];
-    const arrayInKey = bookArr[key];
-    bookCount += arrayInKey.length
-    for (let j = 0; j < arrayInKey.length; j++) {
-
-      pageAmount += arrayInKey[j][1];
-
-    }
-    // console.log(average)
-    // console.log(arrayInKey.length)
-
-  } 
-  const averagePages = pageAmount/bookCount;
-  return averagePages;
+  let totalPageCount = 0;
+  bookArr.forEach((element)=>{
+    totalPageCount += element.pages;
+  })
+  return totalPageCount / bookArr.length;
 }
-
-console.log(averagePageCount(dictionary));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log(averagePageCount(booksByAuthor(dictionary)))
 
 
